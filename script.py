@@ -20,7 +20,7 @@ for page_number in range(1, 2):
     posts = get_data(page_number, token)
     
     for post in posts:
-        print(x['author'])
+        print(post['author'])
 
 cursor.close()
 connection.close()
