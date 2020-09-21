@@ -20,7 +20,29 @@ for page_number in range(1, 2):
     posts = get_data(page_number, token)
     
     for post in posts:
-        print(post['author'])
+        try:
+            url = post['url']
+            submitter = post['author']
+            source = urlparse(url).netloc
+            # Strip url of WWW
+            if "www." in source:
+                source = source.replace('www.','')
+            title = post['title']
+            score = post['score']
+            guild = post['guild_name']
+            submitted = datetime.fromtimestamp(post['created_utc']).strftime("%Y-%m-%d %H:%M:%S")
+            # Ensure the post is for a website and not for an internal ruqqus page
+            if "http" in url:
+                sql = """INSERT INTO tblSiteContent 
+                        (url, title, source, score, submitter, submitted, guild, site) 
+                        VALUES (%s,%s,%s,%s,%s,%s,%s,%s)"""
+                sql_values = (url,title,source,score,submitter,submitted,guild,"ruqqus")
+                cursor.execute(sql, sql_values)
+        except Exception as err:
+            print(err)
+            # Data isn't mission critical, so if we have to drop a record or two, no biggie
+            pass
+        connection.commit()
 
 cursor.close()
 connection.close()
