@@ -13,6 +13,10 @@ connection = mysql.connector.connect(host=config.host,
                                     db=config.db)
 cursor = connection.cursor(prepared=True)
 
+# Purge data from database
+sql = "DELETE FROM tblSiteContent"
+cursor.execute(sql)
+
 # Loop over designated amount of pages
 for page_number in range(1, 2):
     # Since tokens timeout every 10 minutes, go ahead and request a new token for each call
