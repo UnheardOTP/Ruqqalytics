@@ -11,7 +11,6 @@ connection = mysql.connector.connect(host=config.host,
                                     user=config.user,
                                     password=config.password,
                                     db=config.db)
-connection.set_charset_collation('utf8mb4')
 cursor = connection.cursor(prepared=True)
 
 # Purge data from database
@@ -34,6 +33,8 @@ for page_number in range(1, 2):
             if "www." in source:
                 source = source.replace('www.','')
             title = post['title']
+            # Strip ASCII
+            title = title.encode('ascii', 'ignore').decode('ascii')
             score = post['score']
             guild = post['guild_name']
             submitted = datetime.fromtimestamp(post['created_utc']).strftime("%Y-%m-%d %H:%M:%S")
