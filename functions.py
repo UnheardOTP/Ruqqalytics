@@ -29,4 +29,4 @@ def get_data(page_number, token):
     try:
         return r.json()['data']
     except:
-        return Null
+        return ''
