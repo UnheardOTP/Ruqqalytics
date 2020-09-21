@@ -26,4 +26,7 @@ def get_data(page_number, token):
 
     # Call URL
     r=requests.get(url, headers=headers)
-    return r.json()['data']
+    try:
+        return r.json()['data']
+    except:
+        return Null
