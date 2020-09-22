@@ -48,7 +48,6 @@ for page_number in range(1, 2001):
                         (url, title, source, score, submitter, submitted, guild, site, insert_date) 
                         VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s)"""
                 sql_values = (url,title,source,score,submitter,submitted,guild,"ruqqus", insert_date)
-                print(sql_values)
                 cursor.execute(sql, sql_values)
         except Exception as err:
             print(err)
