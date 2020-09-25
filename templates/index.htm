@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/vega/5.16.1/vega.min.js"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/vega-lite/4.16.2/vega-lite.min.js"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/vega-embed/6.12.2/vega-embed.min.js"></script>
+   <meta http-equiv="Refresh" content="60">
+</head>
+<body>
+<h3>Ruqqus Guild Posts from January 1, 2019 going forward. *Data currently being updated, page refreshes automatically.</h3>
+<h3>Last Update: {{ last_update }}</h3>
+<h3>Total Posts: {{ total_posts }}</h3>
+<div id="vis"></div>
+
+<script type="text/javascript">
+  var spec = {{ chart | safe }};
+  vegaEmbed('#vis', spec).then(function(result) {
+    // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+  }).catch(console.error);
+</script>
+</body>
+</html>

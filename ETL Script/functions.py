@@ -1,6 +1,5 @@
 import requests
 
-
 def refresh_api(client_id, client_secret, refresh_token):
     # API Token Call
     headers = {"User-Agent": "Data Analytics"}
